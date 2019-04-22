@@ -19,7 +19,7 @@
     const HALFφ= φ/2.0
     const HALFΦ = Φ/2.0
     const HALFΦSQ = ΦSQ/2.0
-    const SQRTΦ = sqrt(φ)
+    const SQRTφ = sqrt(φ)
     const SQRTΦ = sqrt(Φ)
     const SQRTΦSQ = sqrt(ΦSQ)
 ### fractions of pi
