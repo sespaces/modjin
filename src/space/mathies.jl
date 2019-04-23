@@ -115,6 +115,9 @@ const RHOMBIC_DODECA_VERTS = vcat(CUBE_VERTS, 1.5*OCTA_VERTS)
     sqfe = SQRTΦ
     sqfi = SQRTΦ
     sqfu = SQRTΦSQ
+#### N through S variations
+    nfi, ofi, pfi, qfi, rfi, sfi = NΦ, OΦ, PΦ, QΦ, RΦ, SΦ 
+    nfe, ofe, pfe, qfe, rfe, sfe = Nφ, Oφ, Pφ, Qφ, Rφ, Sφ
 #### fractions of pi
     pio2 = πOVER2
     pio3 = πOVER3
