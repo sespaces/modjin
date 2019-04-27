@@ -124,10 +124,10 @@ const RHOMBIC_DODECA_VERTS = vcat(CUBE_VERTS, 1.5*OCTA_VERTS)
 
 # GEOSPATIAL -- Z+ takes value Y+ and Y+ takes Z- from graphics-orientation
 # icosohedral vertices
-# TODO: composite transformation indicated in comment above; apply to [TODO: Typed ] arrays 
-#    of constants organized similar to above non-arrayed, non-typed constants 
-const GNΦ = [ 0, -1,  Φ ] 
-const GOΦ = [ 0,  1,  Φ ] 
+# TODO: composite transformation indicated in comment above; apply to [TODO: Typed ] arrays
+#    of constants organized similar to above non-arrayed, non-typed constants
+const GNΦ = [ 0, -1,  Φ ]
+const GOΦ = [ 0,  1,  Φ ]
 const GPΦ = [ 1, -Φ,  0 ]
 const GQΦ = [-1, -Φ,  0 ]
 const GRΦ = [ Φ,  0,  1 ]
@@ -158,7 +158,7 @@ earth_radius = 6378137 # 6,378,137 meters, roughly 6,378 Km
     sqfi = SQRTΦ
     sqfu = SQRTΦSQ
 #### N through S variations
-    nfi, ofi, pfi, qfi, rfi, sfi = NΦ, OΦ, PΦ, QΦ, RΦ, SΦ 
+    nfi, ofi, pfi, qfi, rfi, sfi = NΦ, OΦ, PΦ, QΦ, RΦ, SΦ
     nfe, ofe, pfe, qfe, rfe, sfe = Nφ, Oφ, Pφ, Qφ, Rφ, Sφ
 #### fractions of pi
     pio2 = πOVER2
@@ -167,4 +167,4 @@ earth_radius = 6378137 # 6,378,137 meters, roughly 6,378 Km
     pio5 = πOVER5
     pio6 = πOVER6
     pio10 = πOVER10
-"mathies.jl included"
+included_message = "mathies.jl inclusion concluded"
