@@ -4,6 +4,11 @@
     date: April 22, 2019
 """
 # Shortcuts and Aliases
+
+#1 km = (1/1.609344) mi = 0.62137119 mi
+const KM_PER_MILE_RATIO = 1.609344
+const MILE_PER_KM_RATIO = 0.62137119
+
 ## Math Constants
 #### square roots of integers 2, 3, 5, 6, 8, and 10
     const SQRT2 = sqrt(2)
@@ -57,6 +62,25 @@ const P = [ 1,  0,  1]
 const Q = [ 1,  0, -1]
 const R = [ 1,  1,  0]
 const S = [-1,  1,  0]
+
+""" GEOGRAPHIC CARTESIAN: North is Z+, 180 East is Y+, 90 East is X+
+const X = [ 1,  0,  0]
+const Y = [ 0,  1,  0]
+const Z = [ 0,  0,  1]
+const T = [ 1,  1,  1]
+const U = [ 1, -1, -1]
+const V = [-1,  1, -1]
+const W = [-1, -1,  1]
+
+const N = [ 0,  1,  1]
+const O = [ 0, -1,  1]
+const P = [ 1,  0,  1]
+const Q = [ 1,  0, -1]
+const R = [ 1,  1,  0]
+const S = [-1,  1,  0]
+"""
+
+
 #### each vector transformed by magnitudes phi and 1/phi
 const ΦX  = Φ * X, const φX = φ * X
 const ΦY  = Φ * Y, const φY = φ * Y
@@ -96,6 +120,24 @@ const ICOSO_VERTS = [NΦ, OΦ, PΦ, QΦ, RΦ, SΦ,
                      -NΦ, -OΦ, -PΦ, -QΦ, -RΦ, -SΦ]
 const TRIACONTA_VERTS = vcat(DODECA_VERTS, ICOSO_VERTS)
 const RHOMBIC_DODECA_VERTS = vcat(CUBE_VERTS, 1.5*OCTA_VERTS)
+
+
+# GEOSPATIAL -- Z+ takes value Y+ and Y+ takes Z- from graphics-orientation
+# icosohedral vertices
+# TODO: composite transformation indicated in comment above; apply to [TODO: Typed ] arrays 
+#    of constants organized similar to above non-arrayed, non-typed constants 
+const GNΦ = [ 0, -1,  Φ ] 
+const GOΦ = [ 0,  1,  Φ ] 
+const GPΦ = [ 1, -Φ,  0 ]
+const GQΦ = [-1, -Φ,  0 ]
+const GRΦ = [ Φ,  0,  1 ]
+const GSΦ = [-Φ,  0,  1 ]
+
+GEO_ICOSO_VERTS = [-GNΦ, -GOΦ, -GPΦ, -GQΦ, -GRΦ, -GSΦ, GNΦ, GOΦ, GPΦ, GQΦ, GRΦ, GSΦ]
+
+earth_radius = 6378137 # 6,378,137 meters, roughly 6,378 Km
+
+
 ## Aliases
 ### math constants
 #### square roots of integers 2, 3, 5, 6, 8, and 10
@@ -125,3 +167,4 @@ const RHOMBIC_DODECA_VERTS = vcat(CUBE_VERTS, 1.5*OCTA_VERTS)
     pio5 = πOVER5
     pio6 = πOVER6
     pio10 = πOVER10
+"mathies.jl included"
