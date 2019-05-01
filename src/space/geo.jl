@@ -24,21 +24,30 @@ icoso_interior = rad2deg(atan(2))
 # pi/10 is 18 degrees, 3 * pi/10 is 54
 # in geographic terms, the first element of each pair is North (Z+),
 #   the second is East (Y+)
-directions = SVector.([ ( 0           ,  0            ),
-                        ( sin(pi/10)  , -cos(pi/10)   ),
-                        (-sin(3*pi/10), -cos(3*pi/10) ),
-                        (-sin(3*pi/10),  cos(3*pi/10) ),
-                        ( sin(pi/10)  ,  cos(pi/10)   ),
-                        ( atan(2),  0 )])
+pentpoints_right = SVector.([ ( sin(pi/10)  , -cos(pi/10)   ),
+                              (-sin(3*pi/10), -cos(3*pi/10) ),
+                              (-sin(3*pi/10),  cos(3*pi/10) ),
+                              ( sin(pi/10)  ,  cos(pi/10)   ),
+                              ( atan(2),  0 )])
 
-center = LLA(0.0,0.0,0.0)
 
-dir = LLA(rad2deg(pi/2 - atan(2)), 0.0, 0.0)
+# counter-clockwise x,y coords for pentagon with point up at fifth place
+pentpoints_north = SVector.([ (-cos(pi/10)  ,  sin(pi/10)   ),
+                              (-cos(3*pi/10), -sin(3*pi/10) ),
+                              ( cos(3*pi/10), -sin(3*pi/10) ),
+                              ( cos(pi/10)  ,  sin(pi/10)   ),
+                              ( 0.0         ,  pi/2 - atan(2))
+                              ])
 
-#trans = ENUfromLLA(center,wgs84)
-#trans(direction)
-# above, in one line:
-dir_enu = ENU(dir,center,wgs84)
+dirs = pentpoints_north
+dir_degrees = [(rad2deg(dir[1]), rad2deg(dir[2])) for dir in dirs]
+dirs_lla = [ LLA( dir[2], dir[1], 0.0 ) for dir in dir_degrees]
+dirs_ecef = [ ECEF( , dir[1], 0.0 dir[2]) for dir in dirs]
+center = LLA(-90.0,90.0,0.0)
+dirs_enu
+#dir = LLA(rad2deg(pi/2 - atan(2)), 0.0, 0.0)
+dir5 = LLA(dir_degrees[5][2], dir_degrees[5][1], 0.0)
+dir5_enu = ENU(dir5,center,wgs84)
 
 center, dir
 
@@ -76,40 +85,3 @@ pointsxy[5]
 point5 = ENU(pointsxy[5][1], pointsxy[5][2], 0.0)
 p5_ecef = ecef_enu(point5)
 p5_lla = lla_enu(p5_ecef)
-
-
-"""
-typeof(pointsxy[5])
-
-trans = ENUfromLLA(center,wgs84)
-origin = trans(center)
-point_enu = trans(point_lla)|
-x = ECEFfromENU(center, wgs84)(newpoint)
-LLAfromECEF(x)
-"""
-
-#rotY = LinearMap(RotZ(directions[6][1]))
-#rotZ = LinearMap(RotY(directions[6][2]))
-rotY = LinearMap(RotZ(sin(pio10)))
-rotZ = LinearMap(RotY(0.0))
-rotZY = compose(rotZ, rotY)
-rotYZ = compose(rotY, rotZ)
-
-old_ecef = ECEF(0.0, earth_radius, 0.0)
-tolla = LLAfromECEF(wgs84)
-old_lla = tolla(old_ecef)
-
-rotz_old = tolla(ECEF(rotZ(old_ecef)))
-roty_old = tolla(ECEF(rotY(old_ecef)))
-rotzy_old = tolla(ECEF(rotZY(old_ecef)))
-rotyz_old = tolla(ECEF(rotYZ(old_ecef)))
-
-protY = LinearMap(RotZ(proportioned_dirs[6][1]))
-protZ = LinearMap(RotY(proportioned_dirs[6][2]))
-protZY = compose(protZ, protY)
-protYZ = compose(protY, protZ)
-
-protz_old = tolla(ECEF(protZ(old_ecef)))
-proty_old = tolla(ECEF(protY(old_ecef)))
-protzy_old = tolla(ECEF(protZY(old_ecef)))
-protyz_old = tolla(ECEF(protYZ(old_ecef)))
