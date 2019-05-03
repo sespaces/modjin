@@ -41,25 +41,54 @@ pentpoints_north = SVector.([ (-cos(pi/10)  ,  sin(pi/10)   ),
 
 dirs = pentpoints_north
 dir_degrees = [(rad2deg(dir[1]), rad2deg(dir[2])) for dir in dirs]
+
 dirs_lla = [ LLA( dir[2], dir[1], 0.0 ) for dir in dir_degrees]
-dirs_ecef = [ ECEF( , dir[1], 0.0 dir[2]) for dir in dirs]
+#dirs_ecef = [ ECEF( , dir[1], 0.0 dir[2]) for dir in dirs]
+HERE YOU WERE
+# first bead is at South Pole
 center = LLA(-90.0,90.0,0.0)
-dirs_enu
+#dirs_enu
 #dir = LLA(rad2deg(pi/2 - atan(2)), 0.0, 0.0)
 dir5 = LLA(dir_degrees[5][2], dir_degrees[5][1], 0.0)
 dir5_enu = ENU(dir5,center,wgs84)
+YOU WERE HERE
+#ecef_enu = ECEFfromENU(center,wgs84)
+#lla_ecef = LLAfromECEF(wgs84)
+#dir_ecef = ecef_enu(dir_enu)
+#lla_ecef(dir_ecef)
 
-center, dir
 
-ecef_enu = ECEFfromENU(center,wgs84)
+"""
+Modjin.Space.Geo.Beads.jl
+# later modjin.space.geo.Bubbles.jl
 
-lla_ecef = LLAfromECEF(wgs84)
+as with all modjin expressions, there is an "in-of" view and an "out-to" view;
 
-dir_ecef = ecef_enu(dir_enu)
+for 2-dimensional mapping on earth; the equator serves as the first and second
+    circles, with the South and North poles as their respective centers and
+    a radius of 6,378 kilometers
 
-lla_ecef(dir_ecef)
+    these two are each sub-divided into six circles then those now-twelve are
+    sub-divided into six each, giving 72 smaller circles;
 
-point5 = lla_ecef(dir_ecef)
+    these 72 comprise the first "three-letter modjit"; each additional modjit
+    represents three additional subdivsions
+
+    the next modjit, then results in 15,552 circles
+
+    each of these 15,552 has a radius of 109 kilometers, or 1.7 percent of
+    Earth's radius at the equator
+
+
+"""
+
+
+crad = 1/(1 + 2pi/5)
+c5 = earth_radius * crad^5
+c11 = earth_radius * crad^11
+c17 = earth_radius * crad^17
+c23 = earth_radius * crad^23
+# 12 syllables gets from earth to 2 inches !?!
 
 
 t =  0 # polar angle at start is 0E
@@ -78,10 +107,10 @@ pointsxy
 pointsxy[1]
 point1 = ENU(pointsxy[1][1], pointsxy[1][2], 0.0)
 p1_ecef = ecef_enu(point1)
-lla_enu(p1_ecef)
+#lla_enu(p1_ecef)
 
 
 pointsxy[5]
 point5 = ENU(pointsxy[5][1], pointsxy[5][2], 0.0)
 p5_ecef = ecef_enu(point5)
-p5_lla = lla_enu(p5_ecef)
+#p5_lla = lla_enu(p5_ecef)
